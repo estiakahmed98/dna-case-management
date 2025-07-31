@@ -111,7 +111,7 @@ export default function CasesPage() {
          {/* Statistics Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white border-0">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-blue-100 text-sm font-medium">
@@ -125,7 +125,7 @@ export default function CasesPage() {
           </Card>
 
           <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white border-0">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-purple-100 text-sm font-medium">
@@ -141,7 +141,7 @@ export default function CasesPage() {
           </Card>
 
           <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white border-0">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-green-100 text-sm font-medium">
@@ -157,7 +157,7 @@ export default function CasesPage() {
           </Card>
 
           <Card className="bg-gradient-to-br from-orange-500 to-orange-600 text-white border-0">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-orange-100 text-sm font-medium">
