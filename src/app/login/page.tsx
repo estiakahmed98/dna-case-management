@@ -5,7 +5,13 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Loader2, Eye, EyeOff, Shield, Dna } from "lucide-react";
 
 export default function LoginPage() {
@@ -40,12 +46,15 @@ export default function LoginPage() {
   const handleDemoLogin = () => {
     setDemoLoading(true);
     localStorage.setItem("token", "demo-token");
-    localStorage.setItem("user", JSON.stringify({
-      user_id: 1,
-      name: "Demo User",
-      email: "demo@example.com",
-      role: { role_name: "Admin" }
-    }));
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        user_id: 1,
+        name: "Demo User",
+        email: "demo@example.com",
+        role: { role_name: "Admin" },
+      })
+    );
     router.push("/dashboard");
   };
 
@@ -67,7 +76,9 @@ export default function LoginPage() {
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animation: `float ${15 + Math.random() * 10}s ease-in-out infinite`,
+              animation: `float ${
+                15 + Math.random() * 10
+              }s ease-in-out infinite`,
               animationDelay: `${Math.random() * 5}s`,
             }}
           >
@@ -81,11 +92,11 @@ export default function LoginPage() {
             <svg
               className="absolute opacity-10"
               style={{
-                left: `${10 + (i * 15)}%`,
+                left: `${10 + i * 15}%`,
                 top: "0%",
                 width: "200px",
                 height: "100%",
-                animation: `helixRotate ${20 + (i * 3)}s linear infinite`,
+                animation: `helixRotate ${20 + i * 3}s linear infinite`,
                 animationDelay: `${i * 2}s`,
               }}
               viewBox="0 0 200 800"
@@ -105,11 +116,23 @@ export default function LoginPage() {
                 opacity="0.6"
               />
               <defs>
-                <linearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient
+                  id="gradient1"
+                  x1="0%"
+                  y1="0%"
+                  x2="0%"
+                  y2="100%"
+                >
                   <stop offset="0%" stopColor="#06b6d4" />
                   <stop offset="100%" stopColor="#3b82f6" />
                 </linearGradient>
-                <linearGradient id="gradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient
+                  id="gradient2"
+                  x1="0%"
+                  y1="0%"
+                  x2="0%"
+                  y2="100%"
+                >
                   <stop offset="0%" stopColor="#8b5cf6" />
                   <stop offset="100%" stopColor="#06b6d4" />
                 </linearGradient>
@@ -131,22 +154,22 @@ export default function LoginPage() {
               background: `linear-gradient(45deg, #06b6d4, #3b82f6)`,
               animation: `particle ${20 + Math.random() * 15}s linear infinite`,
               animationDelay: `${Math.random() * 10}s`,
-              boxShadow: '0 0 6px rgba(6, 182, 212, 0.6)',
+              boxShadow: "0 0 6px rgba(6, 182, 212, 0.6)",
             }}
           />
         ))}
 
         {/* Grid Pattern */}
         <div className="absolute inset-0 opacity-5">
-          <div 
+          <div
             className="w-full h-full"
             style={{
               backgroundImage: `
                 linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)
               `,
-              backgroundSize: '50px 50px',
-              animation: 'gridMove 30s linear infinite'
+              backgroundSize: "50px 50px",
+              animation: "gridMove 30s linear infinite",
             }}
           />
         </div>
@@ -154,28 +177,45 @@ export default function LoginPage() {
 
       <style jsx global>{`
         @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(180deg); }
+          0%,
+          100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-20px) rotate(180deg);
+          }
         }
         @keyframes helixRotate {
-          0% { transform: translateY(-100%) rotate(0deg); }
-          100% { transform: translateY(100%) rotate(360deg); }
+          0% {
+            transform: translateY(-100%) rotate(0deg);
+          }
+          100% {
+            transform: translateY(100%) rotate(360deg);
+          }
         }
         @keyframes particle {
-          0% { 
-            transform: translateY(100vh) translateX(0px); 
-            opacity: 0; 
+          0% {
+            transform: translateY(100vh) translateX(0px);
+            opacity: 0;
           }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { 
-            transform: translateY(-100vh) translateX(50px); 
-            opacity: 0; 
+          10% {
+            opacity: 1;
+          }
+          90% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(-100vh) translateX(50px);
+            opacity: 0;
           }
         }
         @keyframes gridMove {
-          0% { transform: translate(0, 0); }
-          100% { transform: translate(50px, 50px); }
+          0% {
+            transform: translate(0, 0);
+          }
+          100% {
+            transform: translate(50px, 50px);
+          }
         }
       `}</style>
 
@@ -191,15 +231,14 @@ export default function LoginPage() {
               </div>
             </div>
           </div>
-          
+
           <div className="text-center space-y-2">
             <CardTitle className="text-3xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-              GenomeVault
+              DNA Report System
             </CardTitle>
             <CardDescription className="text-slate-600 text-base font-medium">
-              Advanced Genomic Report Platform
+              DNA analysis and reporting made easy
             </CardDescription>
-            
           </div>
         </CardHeader>
 
@@ -207,7 +246,10 @@ export default function LoginPage() {
           <div className="space-y-4">
             {/* Email Input */}
             <div className="space-y-2">
-              <label className="block text-sm font-semibold text-slate-700" htmlFor="email">
+              <label
+                className="block text-sm font-semibold text-slate-700"
+                htmlFor="email"
+              >
                 Email Address
               </label>
               <Input
@@ -223,7 +265,10 @@ export default function LoginPage() {
 
             {/* Password Input */}
             <div className="space-y-2">
-              <label className="block text-sm font-semibold text-slate-700" htmlFor="password">
+              <label
+                className="block text-sm font-semibold text-slate-700"
+                htmlFor="password"
+              >
                 Password
               </label>
               <div className="relative">
@@ -241,12 +286,16 @@ export default function LoginPage() {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
                 >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  {showPassword ? (
+                    <EyeOff className="w-5 h-5" />
+                  ) : (
+                    <Eye className="w-5 h-5" />
+                  )}
                 </button>
               </div>
             </div>
           </div>
-          
+
           {/* Error Message */}
           {error && (
             <div className="p-4 text-sm text-red-700 bg-red-50 rounded-xl border border-red-200 animate-in slide-in-from-top-2">
@@ -258,7 +307,7 @@ export default function LoginPage() {
           )}
 
           {/* Login Button */}
-          <Button 
+          <Button
             className="w-full h-10 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white rounded-xl shadow-lg shadow-cyan-500/25 transition-all duration-200 hover:shadow-xl hover:shadow-cyan-500/30 hover:scale-[1.02] font-semibold"
             onClick={handleLogin}
             disabled={loading}
@@ -275,22 +324,34 @@ export default function LoginPage() {
               </div>
             )}
           </Button>
-          
+
           {/* Divider */}
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-slate-200" />
+          <div className="text-sm text-gray-600 space-y-2">
+            <p className="font-semibold">Demo credentials:</p>
+
+            <div className="flex gap-4">
+              <p>
+                <strong>Email:</strong> admin@example.com
+              </p>
+              <p>Password: admin123</p>
             </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="px-4 py-1 bg-white text-slate-500 rounded-full border border-slate-200 font-medium">
-                Demo Access
-              </span>
+            <div className="flex gap-4">
+              <p>Email: scientificofficer@example.com</p>
+              <p>Password: Science123</p>
+            </div>
+            <div className="flex gap-4">
+              <p>Email: archiveofficer@example.com</p>
+              <p>Password: archive123</p>
+            </div>
+            <div className="flex gap-4">
+              <p>Email: viewer@example.com</p>
+              <p>Password: viewer123</p>
             </div>
           </div>
 
           {/* Demo Button */}
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             className="w-full h-10 border-2 border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 rounded-xl transition-all duration-200 hover:scale-[1.02] font-semibold"
             onClick={handleDemoLogin}
             disabled={demoLoading}
@@ -300,7 +361,9 @@ export default function LoginPage() {
                 <Loader2 className="w-5 h-5 animate-spin" />
                 <span>Loading Demo...</span>
               </div>
-            ) : "Try Demo Environment"}
+            ) : (
+              "Try Demo Environment"
+            )}
           </Button>
         </CardContent>
       </Card>
