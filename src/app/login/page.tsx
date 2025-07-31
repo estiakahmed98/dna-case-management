@@ -255,7 +255,7 @@ export default function LoginPage() {
               <Input
                 id="email"
                 type="email"
-                placeholder="researcher@university.edu"
+                placeholder="example@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 onKeyDown={handleKeyDown}
@@ -327,8 +327,6 @@ export default function LoginPage() {
 
           {/* Divider */}
           <div className="text-sm text-gray-600 space-y-2">
-            <p className="font-semibold">Demo credentials:</p>
-
             <div className="flex gap-4">
               <p>
                 <strong>Email:</strong> admin@example.com
@@ -351,14 +349,6 @@ export default function LoginPage() {
               </p>
               <p>
                 <strong>Password:</strong> archive123
-              </p>
-            </div>
-            <div className="flex gap-4">
-              <p>
-                <strong>Email:</strong> viewer@example.com
-              </p>
-              <p>
-                <strong>Password:</strong> viewer123
               </p>
             </div>
           </div>
