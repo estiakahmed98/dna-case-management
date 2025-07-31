@@ -333,19 +333,33 @@ export default function LoginPage() {
               <p>
                 <strong>Email:</strong> admin@example.com
               </p>
-              <p>Password: admin123</p>
+              <p>
+                <strong>Password:</strong> admin123
+              </p>
             </div>
             <div className="flex gap-4">
-              <p>Email: scientificofficer@example.com</p>
-              <p>Password: Science123</p>
+              <p>
+                <strong>Email:</strong> scientificofficer@example.com
+              </p>
+              <p>
+                <strong>Password:</strong> Science123
+              </p>
             </div>
             <div className="flex gap-4">
-              <p>Email: archiveofficer@example.com</p>
-              <p>Password: archive123</p>
+              <p>
+                <strong>Email:</strong> archiveofficer@example.com
+              </p>
+              <p>
+                <strong>Password:</strong> archive123
+              </p>
             </div>
             <div className="flex gap-4">
-              <p>Email: viewer@example.com</p>
-              <p>Password: viewer123</p>
+              <p>
+                <strong>Email:</strong> viewer@example.com
+              </p>
+              <p>
+                <strong>Password:</strong> viewer123
+              </p>
             </div>
           </div>
 
