@@ -18,7 +18,7 @@ export function ReportForm({ onReportAdded }: ReportFormProps) {
     sample_type: '',
     lab_register_number: '',
     scientific_officer_id: '2', // Default to the Scientific Officer from seed
-    storage_location_id: '3', // Default to report storage location
+    storage_location_id: '2', // Default to report storage location
     barcode: '',
     archive_entry_date: ''
   });
