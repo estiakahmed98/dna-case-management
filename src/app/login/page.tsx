@@ -326,8 +326,21 @@ export default function LoginPage() {
           </Button>
 
           {/* Divider */}
-          <div className="text-sm text-gray-600 space-y-2">
-            <div className="flex gap-4">
+          {/* Divider */}
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-slate-200" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="px-4 py-1 bg-white text-slate-500 rounded-full border border-slate-200 font-medium">
+                Demo Access
+              </span>
+            </div>
+          </div>
+
+          {/* Demo Login Info */}
+          <div className="text-sm text-gray-600 space-y-2 text-center">
+            <div className="flex justify-center gap-4">
               <p>
                 <strong>Email:</strong> admin@example.com
               </p>
@@ -335,7 +348,7 @@ export default function LoginPage() {
                 <strong>Password:</strong> admin123
               </p>
             </div>
-            <div className="flex gap-4">
+            <div className="flex justify-center gap-4">
               <p>
                 <strong>Email:</strong> scientificofficer@example.com
               </p>
@@ -343,7 +356,7 @@ export default function LoginPage() {
                 <strong>Password:</strong> Science123
               </p>
             </div>
-            <div className="flex gap-4">
+            <div className="flex justify-center gap-4">
               <p>
                 <strong>Email:</strong> archiveofficer@example.com
               </p>
