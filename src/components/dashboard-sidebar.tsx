@@ -202,7 +202,7 @@ export default function DashboardSidebar({
             <button
               onClick={onLogout}
               className={`
-                w-full flex items-center justify-center p-2 rounded-lg transition-colors
+                w-full font-semibold flex items-center justify-center p-2 rounded-lg transition-colors
                 bg-sky-900 hover:bg-sky-800
                 ${isCollapsed ? "" : "gap-2"}
               `}
