@@ -5,6 +5,21 @@ import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { 
+  ArrowDownToLine, 
+  ArrowUpFromLine, 
+  Trash2, 
+  RefreshCw, 
+  Gavel, 
+  FlaskConical,
+  User,
+  Calendar,
+  FileText,
+  Package
+} from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 
 interface MovementFormProps {
   type: 'sample' | 'report';
@@ -15,7 +30,7 @@ export function MovementForm({ type, onMovementAdded }: MovementFormProps) {
   const [formData, setFormData] = useState({
     item_id: '',
     action_type: 'CHECK_OUT',
-    performed_by: '1', // Default user
+    performed_by: '1',
     reason: '',
     expected_return_date: '',
     disposal_method: '',
@@ -24,10 +39,17 @@ export function MovementForm({ type, onMovementAdded }: MovementFormProps) {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSelectChange = (name: string, value: string) => {
+    setFormData({
+      ...formData,
+      [name]: value
     });
   };
 
@@ -63,115 +85,213 @@ export function MovementForm({ type, onMovementAdded }: MovementFormProps) {
       });
       
       onMovementAdded();
-      alert(`${type} movement recorded successfully!`);
     } catch (error) {
       console.error(`Error recording ${type} movement:`, error);
-      alert(`Error recording ${type} movement. Please try again.`);
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const getActionIcon = (action: string) => {
+    switch (action) {
+      case 'CHECK_OUT': return <ArrowDownToLine className="h-4 w-4" />;
+      case 'CHECK_IN': return <ArrowUpFromLine className="h-4 w-4" />;
+      case 'DISPOSAL': return <Trash2 className="h-4 w-4" />;
+      case 'TRANSFER': return <RefreshCw className="h-4 w-4" />;
+      case 'COURT_PRESENTATION': return <Gavel className="h-4 w-4" />;
+      case 'ANALYSIS': return <FlaskConical className="h-4 w-4" />;
+      default: return <Package className="h-4 w-4" />;
+    }
+  };
+
   return (
-    <Card className="mb-6">
-      <CardHeader>
-        <CardTitle>Record {type.charAt(0).toUpperCase() + type.slice(1)} Movement</CardTitle>
+    <Card className="mb-6 shadow-sm border-0 bg-white/80 backdrop-blur">
+      <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200">
+        <CardTitle className="flex items-center gap-2">
+          {type === 'sample' ? (
+            <Package className="h-6 w-6 text-blue-600" />
+          ) : (
+            <FileText className="h-6 w-6 text-blue-600" />
+          )}
+          Record {type.charAt(0).toUpperCase() + type.slice(1)} Movement
+        </CardTitle>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">{type.charAt(0).toUpperCase() + type.slice(1)} ID</label>
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Item ID */}
+          <div className="space-y-2">
+            <Label htmlFor="item_id">
+              {type === 'sample' ? 'Sample ID' : 'Report ID'}
+            </Label>
             <Input
+              id="item_id"
               type="number"
               name="item_id"
               value={formData.item_id}
               onChange={handleChange}
               required
               placeholder={`Enter ${type} ID`}
+              className="focus-visible:ring-blue-500"
             />
           </div>
           
-          <div>
-            <label className="block text-sm font-medium mb-1">Action Type</label>
-            <select
+          {/* Action Type */}
+          <div className="space-y-2">
+            <Label>Action Type</Label>
+            <Select
               name="action_type"
               value={formData.action_type}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onValueChange={(value) => handleSelectChange('action_type', value)}
             >
-              <option value="CHECK_OUT">Check Out</option>
-              <option value="CHECK_IN">Check In</option>
-              <option value="TRANSFER">Transfer</option>
-              <option value="DISPOSAL">Disposal</option>
-              <option value="ANALYSIS">Analysis</option>
-              <option value="COURT_PRESENTATION">Court Presentation</option>
-            </select>
+              <SelectTrigger className="focus-visible:ring-blue-500">
+                <div className="flex items-center gap-2">
+                  {getActionIcon(formData.action_type)}
+                  <SelectValue placeholder="Select action" />
+                </div>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="CHECK_OUT">
+                  <div className="flex items-center gap-2">
+                    <ArrowDownToLine className="h-4 w-4" />
+                    Check Out
+                  </div>
+                </SelectItem>
+                <SelectItem value="CHECK_IN">
+                  <div className="flex items-center gap-2">
+                    <ArrowUpFromLine className="h-4 w-4" />
+                    Check In
+                  </div>
+                </SelectItem>
+                <SelectItem value="TRANSFER">
+                  <div className="flex items-center gap-2">
+                    <RefreshCw className="h-4 w-4" />
+                    Transfer
+                  </div>
+                </SelectItem>
+                <SelectItem value="DISPOSAL">
+                  <div className="flex items-center gap-2">
+                    <Trash2 className="h-4 w-4" />
+                    Disposal
+                  </div>
+                </SelectItem>
+                <SelectItem value="ANALYSIS">
+                  <div className="flex items-center gap-2">
+                    <FlaskConical className="h-4 w-4" />
+                    Analysis
+                  </div>
+                </SelectItem>
+                <SelectItem value="COURT_PRESENTATION">
+                  <div className="flex items-center gap-2">
+                    <Gavel className="h-4 w-4" />
+                    Court Presentation
+                  </div>
+                </SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           
-          <div>
-            <label className="block text-sm font-medium mb-1">Performed By (User ID)</label>
+          {/* Performed By */}
+          <div className="space-y-2">
+            <Label htmlFor="performed_by">
+              <div className="flex items-center gap-2">
+                <User className="h-4 w-4" />
+                Performed By (User ID)
+              </div>
+            </Label>
             <Input
+              id="performed_by"
               type="number"
               name="performed_by"
               value={formData.performed_by}
               onChange={handleChange}
               required
               placeholder="Enter user ID"
+              className="focus-visible:ring-blue-500"
             />
           </div>
           
-          <div>
-            <label className="block text-sm font-medium mb-1">Expected Return Date</label>
+          {/* Expected Return Date */}
+          <div className="space-y-2">
+            <Label htmlFor="expected_return_date">
+              <div className="flex items-center gap-2">
+                <Calendar className="h-4 w-4" />
+                Expected Return Date
+              </div>
+            </Label>
             <Input
+              id="expected_return_date"
               type="date"
               name="expected_return_date"
               value={formData.expected_return_date}
               onChange={handleChange}
               placeholder="Optional"
+              className="focus-visible:ring-blue-500"
             />
           </div>
           
-          <div className="col-span-2">
-            <label className="block text-sm font-medium mb-1">Reason</label>
-            <textarea
+          {/* Reason */}
+          <div className="md:col-span-2 space-y-2">
+            <Label htmlFor="reason">Reason</Label>
+            <Textarea
+              id="reason"
               name="reason"
               value={formData.reason}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               rows={3}
               placeholder="Enter reason for movement"
+              className="focus-visible:ring-blue-500"
             />
           </div>
           
+          {/* Sample-specific fields */}
           {type === 'sample' && (
             <>
-              <div>
-                <label className="block text-sm font-medium mb-1">Disposal Method</label>
+              <div className="space-y-2">
+                <Label htmlFor="disposal_method">Disposal Method</Label>
                 <Input
+                  id="disposal_method"
                   type="text"
                   name="disposal_method"
                   value={formData.disposal_method}
                   onChange={handleChange}
                   placeholder="e.g., Incineration, Autoclave"
+                  className="focus-visible:ring-blue-500"
                 />
               </div>
               
-              <div>
-                <label className="block text-sm font-medium mb-1">Disposal Authority</label>
+              <div className="space-y-2">
+                <Label htmlFor="disposal_authority">Disposal Authority</Label>
                 <Input
+                  id="disposal_authority"
                   type="text"
                   name="disposal_authority"
                   value={formData.disposal_authority}
                   onChange={handleChange}
                   placeholder="e.g., Waste Management Company"
+                  className="focus-visible:ring-blue-500"
                 />
               </div>
             </>
           )}
           
-          <div className="col-span-2">
-            <Button type="submit" disabled={isSubmitting} className="w-full">
-              {isSubmitting ? 'Recording Movement...' : 'Record Movement'}
+          {/* Submit Button */}
+          <div className="md:col-span-2">
+            <Button 
+              type="submit" 
+              disabled={isSubmitting} 
+              className="w-full bg-blue-600 hover:bg-blue-700 transition-colors"
+            >
+              {isSubmitting ? (
+                <div className="flex items-center gap-2">
+                  <RefreshCw className="h-4 w-4 animate-spin" />
+                  Recording Movement...
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <Package className="h-4 w-4" />
+                  Record Movement
+                </div>
+              )}
             </Button>
           </div>
         </form>

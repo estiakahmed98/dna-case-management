@@ -52,18 +52,17 @@ export default function DashboardSidebar({
       label: "Dashboard",
       icon: <LayoutDashboard size={20} />,
     },
+    {
+      href: "/dashboard/cases",
+      label: "Cases",
+      icon: <FolderArchive size={20} />,
+    },
     { href: "/dashboard/samples", label: "Samples", icon: <Dna size={20} /> },
     {
       href: "/dashboard/reports",
       label: "Reports",
       icon: <FileText size={20} />,
     },
-    {
-      href: "/dashboard/cases",
-      label: "Cases",
-      icon: <FolderArchive size={20} />,
-    },
-    { href: "/dashboard/users", label: "Users", icon: <Users size={20} /> },
     {
       href: "/dashboard/storage",
       label: "Storage",
@@ -79,6 +78,7 @@ export default function DashboardSidebar({
       label: "Analytics",
       icon: <LineChart size={20} />,
     },
+    { href: "/dashboard/users", label: "Users", icon: <Users size={20} /> },
     {
       href: "/dashboard/audit-logs",
       label: "Audit Logs",
