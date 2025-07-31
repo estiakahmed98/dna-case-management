@@ -3,7 +3,14 @@ import axios from "axios";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { FileText, Calendar, MapPin, Shield, Plus, CheckCircle } from "lucide-react";
+import {
+  FileText,
+  Calendar,
+  MapPin,
+  Shield,
+  Plus,
+  CheckCircle,
+} from "lucide-react";
 
 interface CaseFormProps {
   onCaseAdded: () => void;
@@ -11,19 +18,21 @@ interface CaseFormProps {
 
 export function CaseForm({ onCaseAdded }: CaseFormProps) {
   const [formData, setFormData] = useState({
-    police_case_number: '',
-    case_date: '',
-    station_id: '1',
-    case_type: 'Rape'
+    police_case_number: "",
+    case_date: "",
+    station_id: "1",
+    case_type: "Rape",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -32,26 +41,26 @@ export function CaseForm({ onCaseAdded }: CaseFormProps) {
     setIsSubmitting(true);
 
     try {
-      await axios.post('/api/cases', {
+      await axios.post("/api/cases", {
         ...formData,
         station_id: parseInt(formData.station_id),
-        case_date: new Date(formData.case_date)
+        case_date: new Date(formData.case_date),
       });
-      
+
       // Reset form
       setFormData({
-        police_case_number: '',
-        case_date: '',
-        station_id: '1',
-        case_type: 'Rape'
+        police_case_number: "",
+        case_date: "",
+        station_id: "1",
+        case_type: "Rape",
       });
-      
+
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 3000);
       onCaseAdded();
     } catch (error) {
-      console.error('Error adding case:', error);
-      alert('Error adding case. Please try again.');
+      console.error("Error adding case:", error);
+      alert("Error adding case. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -70,10 +79,12 @@ export function CaseForm({ onCaseAdded }: CaseFormProps) {
           {showSuccess && (
             <div className="mb-6 p-4 bg-green-50 border-l-4 border-green-400 rounded-lg flex items-center">
               <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-              <span className="text-green-800 font-medium">Case added successfully!</span>
+              <span className="text-green-800 font-medium">
+                Case added successfully!
+              </span>
             </div>
           )}
-          
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
@@ -91,7 +102,7 @@ export function CaseForm({ onCaseAdded }: CaseFormProps) {
                   className="focus:border-blue-500 focus:ring-blue-200"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <label className="flex items-center text-sm font-semibold text-gray-700 mb-2">
                   <Calendar className="h-4 w-4 mr-2 text-purple-600" />
@@ -106,7 +117,7 @@ export function CaseForm({ onCaseAdded }: CaseFormProps) {
                   className="focus:border-purple-500 focus:ring-purple-200"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <label className="flex items-center text-sm font-semibold text-gray-700 mb-2">
                   <MapPin className="h-4 w-4 mr-2 text-green-600" />
@@ -125,7 +136,7 @@ export function CaseForm({ onCaseAdded }: CaseFormProps) {
                   <option value="5">West Division</option>
                 </select>
               </div>
-              
+
               <div className="space-y-2">
                 <label className="flex items-center text-sm font-semibold text-gray-700 mb-2">
                   <Shield className="h-4 w-4 mr-2 text-red-600" />
@@ -146,13 +157,19 @@ export function CaseForm({ onCaseAdded }: CaseFormProps) {
                 </select>
               </div>
             </div>
-            
+
             <div className="pt-4">
-              <Button 
-                type="submit" 
-                disabled={isSubmitting} 
-                className="w-full py-4 text-lg font-semibold"
+              <Button
+                type="submit"
+                disabled={isSubmitting}
                 size="lg"
+                className="
+    w-full py-4 text-lg font-semibold text-white
+    bg-gradient-to-r from-blue-600 to-purple-600
+    hover:from-blue-700 hover:to-purple-700
+    focus:outline-none focus:ring-4 focus:ring-blue-200
+    disabled:opacity-70 disabled:cursor-not-allowed
+  "
               >
                 {isSubmitting ? (
                   <span className="flex items-center justify-center">

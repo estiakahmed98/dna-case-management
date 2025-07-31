@@ -11,7 +11,10 @@ import {
   Search,
   Filter,
   RefreshCw,
+  Database,
+  Columns4,
 } from "lucide-react";
+
 import { CaseForm } from "@/components/CaseForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -86,12 +89,16 @@ export default function CasesPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
-      <div className="container mx-auto px-4 py-8">
+      <div className="w-full p-8 mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="bg-blue-600 p-3 rounded-xl">
+              <Columns4 className="h-8 w-8 text-white" />
+            </div>
+
             <div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-1">
                 Case Management System
               </h1>
               <p className="text-gray-600 text-lg">
@@ -101,10 +108,8 @@ export default function CasesPage() {
           </div>
         </div>
 
-        <CaseForm onCaseAdded={fetchCases} />
-
-        {/* Statistics Cards */}
-        {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+         {/* Statistics Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white border-0">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
@@ -164,7 +169,11 @@ export default function CasesPage() {
               </div>
             </CardContent>
           </Card>
-        </div> */}
+        </div>
+
+        <CaseForm onCaseAdded={fetchCases} />
+
+       
 
         {/* Cases Table */}
         <Card className="shadow-xl border-0">

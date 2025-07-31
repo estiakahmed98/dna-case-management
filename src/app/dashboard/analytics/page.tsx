@@ -77,7 +77,7 @@ export default function AnalyticsPage() {
   );
 
   return (
-    <div className="min p-2">
+    <div className="w-full mx-auto p-8">
         {/* Header Section */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">

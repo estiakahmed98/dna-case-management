@@ -124,7 +124,7 @@ export default function ReportsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50">
-      <div className="container mx-auto px-6 py-8">
+      <div className="w-full mx-auto p-8">
         {/* Header Section */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
@@ -140,54 +140,55 @@ export default function ReportsPage() {
               </p>
             </div>
           </div>
-
-          {/* Stats Cards */}
-          {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            <Card className="bg-gradient-to-r from-purple-500 to-purple-600 text-white border-0">
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-purple-100 text-sm">Total Reports</p>
-                    <p className="text-2xl font-bold">{reports.length}</p>
-                  </div>
-                  <FileText className="h-8 w-8 text-purple-200" />
+        </div>
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <Card className="bg-gradient-to-r from-purple-500 to-purple-600 text-white border-0">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-purple-100 text-sm">Total Reports</p>
+                  <p className="text-2xl font-bold">{reports.length}</p>
                 </div>
-              </CardContent>
-            </Card>
-            <Card className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white border-0">
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-emerald-100 text-sm">Delivered</p>
-                    <p className="text-2xl font-bold">{deliveredReports}</p>
-                  </div>
-                  <Calendar className="h-8 w-8 text-emerald-200" />
+                <FileText className="h-8 w-8 text-purple-200" />
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white border-0">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-emerald-100 text-sm">Delivered</p>
+                  <p className="text-2xl font-bold">{deliveredReports}</p>
                 </div>
-              </CardContent>
-            </Card>
-            <Card className="bg-gradient-to-r from-orange-500 to-orange-600 text-white border-0">
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-orange-100 text-sm">Pending</p>
-                    <p className="text-2xl font-bold">{pendingReports}</p>
-                  </div>
-                  <Clock className="h-8 w-8 text-orange-200" />
+                <Calendar className="h-8 w-8 text-emerald-200" />
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="bg-gradient-to-r from-orange-500 to-orange-600 text-white border-0">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-orange-100 text-sm">Pending</p>
+                  <p className="text-2xl font-bold">{pendingReports}</p>
                 </div>
-              </CardContent>
-            </Card>
-            <Card className="bg-gradient-to-r from-indigo-500 to-indigo-600 text-white border-0">
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-indigo-100 text-sm">Active Cases</p>
-                    <p className="text-2xl font-bold">{new Set(reports.map(r => r.case_id)).size}</p>
-                  </div>
-                  <User className="h-8 w-8 text-indigo-200" />
+                <Clock className="h-8 w-8 text-orange-200" />
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="bg-gradient-to-r from-indigo-500 to-indigo-600 text-white border-0">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-indigo-100 text-sm">Active Cases</p>
+                  <p className="text-2xl font-bold">
+                    {new Set(reports.map((r) => r.case_id)).size}
+                  </p>
                 </div>
-              </CardContent>
-            </Card>
-          </div> */}
+                <User className="h-8 w-8 text-indigo-200" />
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         <ReportForm onReportAdded={fetchReports} />
