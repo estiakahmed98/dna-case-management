@@ -60,7 +60,7 @@ export function CaseForm({ onCaseAdded }: CaseFormProps) {
   return (
     <div className="mb-8">
       <Card className="bg-gradient-to-br from-white to-blue-50 border-2 border-blue-100">
-        <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3">
+        <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-t-lg">
           <CardTitle className="flex items-center text-white text-xl">
             <Plus className="mr-3 h-6 w-6" />
             Add New Case

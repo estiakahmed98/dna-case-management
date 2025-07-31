@@ -75,14 +75,13 @@ export function ReportForm({ onReportAdded }: ReportFormProps) {
 
   return (
     <Card className="mb-8 shadow-lg border-0 bg-white/80 backdrop-blur overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-3">
+      <CardHeader className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-3 rounded-t-lg">
         <CardTitle className="text-2xl font-bold flex items-center gap-3">
           <div className="bg-white/20 p-2 rounded-lg">
             <Plus className="h-6 w-6" />
           </div>
           Add New Forensic Report
         </CardTitle>
-        <p className="text-purple-100">Register a new forensic analysis report in the system</p>
       </CardHeader>
       <CardContent className="p-8">
         <form onSubmit={handleSubmit} className="space-y-8">

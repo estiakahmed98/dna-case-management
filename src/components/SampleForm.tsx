@@ -78,14 +78,13 @@ export function SampleForm({ onSampleAdded }: SampleFormProps) {
 
   return (
     <Card className="mb-8 shadow-lg border-0 bg-white/80 backdrop-blur overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-3">
+      <CardHeader className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-3 rounded-t-lg">
         <CardTitle className="text-2xl font-bold flex items-center gap-3">
           <div className="bg-white/20 rounded-lg">
             <Plus className="h-6 w-6" />
           </div>
           Add New DNA Sample
         </CardTitle>
-        <p className="text-emerald-100">Enter sample details to register a new forensic specimen</p>
       </CardHeader>
       <CardContent className="p-8">
         <form onSubmit={handleSubmit} className="space-y-8">
