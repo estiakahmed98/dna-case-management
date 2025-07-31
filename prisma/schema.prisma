@@ -1,0 +1,162 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Role {
+  role_id   Int    @id @default(autoincrement())
+  role_name String @unique
+  users     User[]
+}
+
+model User {
+  user_id            Int     @id @default(autoincrement())
+  name               String
+  email              String  @unique
+  password_hash      String?
+  role_id            Int
+  role               Role    @relation(fields: [role_id], references: [role_id])
+  two_factor_enabled Boolean @default(false)
+
+  reports      Report[]       @relation("UserReports")
+  samples      DnaSample[]    @relation("UserSamples")
+  authAccounts AuthAccount[]
+  twoFactor    TwoFactorAuth?
+
+  reportMovements ReportMovement[] @relation("UserReportMovements")
+  sampleMovements SampleMovement[] @relation("UserSampleMovements")
+  auditTrails     AuditTrail[]     @relation("UserAuditTrails")
+}
+
+model AuthAccount {
+  account_id          Int       @id @default(autoincrement())
+  user_id             Int
+  user                User      @relation(fields: [user_id], references: [user_id])
+  provider            String
+  provider_account_id String
+  access_token        String?
+  refresh_token       String?
+  expires_at          DateTime?
+
+  @@unique([provider, provider_account_id])
+}
+
+model TwoFactorAuth {
+  tfa_id       Int      @id @default(autoincrement())
+  user_id      Int      @unique
+  user         User     @relation(fields: [user_id], references: [user_id])
+  secret_key   String
+  backup_codes String[]
+  is_enabled   Boolean  @default(false)
+  created_at   DateTime @default(now())
+}
+
+model PoliceStation {
+  station_id     Int     @id @default(autoincrement())
+  name           String
+  address        String?
+  contact_number String?
+  cases          Case[]
+}
+
+model Case {
+  case_id            Int           @id @default(autoincrement())
+  police_case_number String
+  case_date          DateTime
+  station_id         Int
+  station            PoliceStation @relation(fields: [station_id], references: [station_id])
+  case_type          String        @default("Rape")
+  reports            Report[]
+  samples            DnaSample[]
+}
+
+model StorageLocation {
+  location_id      Int         @id @default(autoincrement())
+  type             String
+  cabinet          String?
+  rack             String?
+  shelf            String?
+  freezer_unit     String?
+  temperature_zone String?
+  reports          Report[]
+  samples          DnaSample[]
+}
+
+model Report {
+  report_id             Int              @id @default(autoincrement())
+  case_id               Int
+  case                  Case             @relation(fields: [case_id], references: [case_id])
+  report_received_date  DateTime
+  report_delivery_date  DateTime?
+  sample_type           String?
+  lab_register_number   String?
+  scientific_officer_id Int
+  officer               User             @relation("UserReports", fields: [scientific_officer_id], references: [user_id])
+  storage_location_id   Int
+  location              StorageLocation  @relation(fields: [storage_location_id], references: [location_id])
+  barcode               String           @unique
+  archive_entry_date    DateTime
+  movements             ReportMovement[]
+}
+
+model ReportMovement {
+  movement_id          Int       @id @default(autoincrement())
+  report_id            Int
+  report               Report    @relation(fields: [report_id], references: [report_id])
+  action_type          String
+  performed_by         Int
+  user                 User      @relation("UserReportMovements", fields: [performed_by], references: [user_id])
+  reason               String?
+  date                 DateTime  @default(now())
+  expected_return_date DateTime?
+  returned_date        DateTime?
+}
+
+model DnaSample {
+  sample_id             Int              @id @default(autoincrement())
+  case_id               Int
+  case                  Case             @relation(fields: [case_id], references: [case_id])
+  sample_type           String
+  sample_source         String
+  collection_date       DateTime
+  received_date         DateTime
+  lab_register_number   String?
+  scientific_officer_id Int
+  officer               User             @relation("UserSamples", fields: [scientific_officer_id], references: [user_id])
+  storage_location_id   Int
+  location              StorageLocation  @relation(fields: [storage_location_id], references: [location_id])
+  barcode               String           @unique
+  packaging_info        String?
+  expiry_date           DateTime?
+  movements             SampleMovement[]
+}
+
+model SampleMovement {
+  movement_id          Int       @id @default(autoincrement())
+  sample_id            Int
+  sample               DnaSample @relation(fields: [sample_id], references: [sample_id])
+  action_type          String
+  performed_by         Int
+  user                 User      @relation("UserSampleMovements", fields: [performed_by], references: [user_id])
+  reason               String?
+  date                 DateTime  @default(now())
+  expected_return_date DateTime?
+  returned_date        DateTime?
+  disposal_method      String?
+  disposal_authority   String?
+}
+
+model AuditTrail {
+  audit_id     Int      @id @default(autoincrement())
+  entity_type  String
+  entity_id    Int
+  action       String
+  performed_by Int
+  user         User     @relation("UserAuditTrails", fields: [performed_by], references: [user_id])
+  timestamp    DateTime @default(now())
+  details      Json
+}

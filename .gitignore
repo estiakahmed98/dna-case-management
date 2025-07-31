@@ -1,0 +1,34 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Next.js build
+.next/
+out/
+.vercel/
+dist/
+coverage/
+.cache/
+.vite/
+*.tsbuildinfo
+
+# Mac & OS clutter
+.DS_Store
+*.swp
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Editor folders
+.vscode/
+.idea/
+
+# Optional: uncomment to ignore .env files
+.env
+.env.local
+.env.*.local
