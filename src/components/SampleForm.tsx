@@ -19,7 +19,7 @@ export function SampleForm({ onSampleAdded }: SampleFormProps) {
     received_date: '',
     lab_register_number: '',
     scientific_officer_id: '2', // Default to the Scientific Officer from seed
-    storage_location_id: '4', // Default to sample storage location
+    storage_location_id: '2', // Default to sample storage location
     barcode: '',
     packaging_info: '',
     expiry_date: ''
